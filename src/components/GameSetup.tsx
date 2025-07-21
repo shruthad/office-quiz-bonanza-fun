@@ -4,17 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Play, Users, Trophy } from "lucide-react";
+import { Play, Users, Trophy, Edit } from "lucide-react";
 import { TeamCard } from "./TeamCard";
 
 interface GameSetupProps {
   onStartGame: (teams: Team[]) => void;
+  onCreateQuiz: () => void;
 }
 
 const DEFAULT_TEAM_NAMES = ["Team Alpha", "Team Beta", "Team Gamma", "Team Delta"];
 const TEAM_COLORS: Team['color'][] = ['red', 'blue', 'green', 'orange'];
 
-export const GameSetup = ({ onStartGame }: GameSetupProps) => {
+export const GameSetup = ({ onStartGame, onCreateQuiz }: GameSetupProps) => {
   const [teamNames, setTeamNames] = useState<string[]>(DEFAULT_TEAM_NAMES);
 
   const handleTeamNameChange = (index: number, name: string) => {
@@ -113,15 +114,26 @@ export const GameSetup = ({ onStartGame }: GameSetupProps) => {
               </ul>
             </div>
 
-            {/* Start Button */}
-            <Button 
-              onClick={handleStartGame}
-              size="lg"
-              className="w-full text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 animate-pulse-glow"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Start the Quiz Show!
-            </Button>
+            {/* Action Buttons */}
+            <div className="flex gap-4">
+              <Button 
+                onClick={onCreateQuiz}
+                size="lg"
+                variant="outline"
+                className="flex-1 text-lg font-semibold"
+              >
+                <Edit className="w-5 h-5 mr-2" />
+                Create Custom Quiz
+              </Button>
+              <Button 
+                onClick={handleStartGame}
+                size="lg"
+                className="flex-1 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Start Quiz Show!
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>

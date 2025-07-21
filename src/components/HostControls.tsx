@@ -130,10 +130,7 @@ export const HostControls = ({
                 key={team.id}
                 variant={currentTeam === team.id ? "default" : "outline"}
                 size="sm"
-                className={cn(
-                  "transition-all duration-200",
-                  currentTeam === team.id && "animate-pulse-glow"
-                )}
+                className="transition-all duration-200"
                 onClick={() => onSelectTeam(team.id)}
                 style={{
                   background: currentTeam === team.id ? `hsl(var(--team-${team.color}))` : undefined,

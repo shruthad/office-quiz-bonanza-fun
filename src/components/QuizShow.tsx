@@ -5,8 +5,9 @@ import { TeamCard } from "./TeamCard";
 import { QuestionDisplay } from "./QuestionDisplay";
 import { HostControls } from "./HostControls";
 import { GameSetup } from "./GameSetup";
+import { QuizBuilder } from "./QuizBuilder";
 import { Button } from "@/components/ui/button";
-import { Settings, Trophy } from "lucide-react";
+import { Settings, Trophy, Edit } from "lucide-react";
 import { toast } from "sonner";
 
 const INITIAL_TEAMS: Team[] = [
@@ -26,6 +27,7 @@ export const QuizShow = () => {
     gamePhase: 'setup'
   });
   const [showHostControls, setShowHostControls] = useState(false);
+  const [showQuizBuilder, setShowQuizBuilder] = useState(false);
 
   const currentRound = rounds[gameState.currentRound];
   const currentQuestion = currentRound?.questions[currentRound.currentQuestion];
@@ -118,8 +120,31 @@ export const QuizShow = () => {
     toast.info("Game reset! Ready for a new round 🔄");
   }, []);
 
+  const handleSaveCustomQuiz = useCallback((customRounds: typeof QUIZ_ROUNDS) => {
+    setRounds(customRounds);
+    setShowQuizBuilder(false);
+    toast.success("Custom quiz loaded! 🎯");
+  }, []);
+
+  const handlePreviewQuiz = useCallback((customRounds: typeof QUIZ_ROUNDS) => {
+    setRounds(customRounds);
+    setGameState(prev => ({ ...prev, gamePhase: 'playing' }));
+    setShowQuizBuilder(false);
+    toast.info("Quiz preview mode! 👁️");
+  }, []);
+
+  if (showQuizBuilder) {
+    return (
+      <QuizBuilder
+        onSaveQuiz={handleSaveCustomQuiz}
+        onPreviewQuiz={handlePreviewQuiz}
+        onBack={() => setShowQuizBuilder(false)}
+      />
+    );
+  }
+
   if (gameState.gamePhase === 'setup') {
-    return <GameSetup onStartGame={handleStartGame} />;
+    return <GameSetup onStartGame={handleStartGame} onCreateQuiz={() => setShowQuizBuilder(true)} />;
   }
 
   const winner = teams.reduce((prev, current) => 
@@ -134,6 +159,14 @@ export const QuizShow = () => {
           Office Quiz Show
         </h1>
         <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={() => setShowQuizBuilder(true)}
+            className="flex items-center gap-2"
+          >
+            <Edit className="w-4 h-4" />
+            Create Quiz
+          </Button>
           <Button
             variant="outline"
             onClick={() => setShowHostControls(!showHostControls)}
