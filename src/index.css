@@ -8,27 +8,27 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Quiz Show Theme - Electric Purple & Gold */
-    --background: 250 20% 6%;
+    /* Quiz Show Theme - Fun & Vibrant */
+    --background: 220 30% 8%;
     --foreground: 280 5% 95%;
 
-    --card: 250 15% 8%;
+    --card: 220 25% 10%;
     --card-foreground: 280 5% 95%;
 
-    --popover: 250 15% 8%;
+    --popover: 220 25% 10%;
     --popover-foreground: 280 5% 95%;
 
-    --primary: 280 100% 70%;
-    --primary-foreground: 250 20% 6%;
+    --primary: 270 95% 65%;
+    --primary-foreground: 220 30% 8%;
 
-    --secondary: 250 15% 15%;
+    --secondary: 220 20% 18%;
     --secondary-foreground: 280 5% 90%;
 
-    --muted: 250 10% 12%;
-    --muted-foreground: 280 5% 60%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 280 5% 65%;
 
-    --accent: 45 100% 60%;
-    --accent-foreground: 250 20% 6%;
+    --accent: 190 95% 55%;
+    --accent-foreground: 220 30% 8%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 280 5% 95%;
@@ -37,24 +37,24 @@ All colors MUST be HSL.
     --input: 250 10% 15%;
     --ring: 280 100% 70%;
 
-    /* Game Show Specific Colors */
-    --team-red: 0 85% 60%;
-    --team-blue: 220 85% 60%;
-    --team-green: 140 85% 50%;
-    --team-orange: 25 95% 60%;
+    /* Game Show Specific Colors - Fun & Vibrant */
+    --team-red: 350 90% 65%;
+    --team-blue: 200 95% 60%;
+    --team-green: 160 85% 55%;
+    --team-orange: 30 95% 65%;
     
-    --correct: 140 85% 50%;
-    --incorrect: 0 85% 60%;
-    --gold: 45 100% 60%;
+    --correct: 160 85% 55%;
+    --incorrect: 350 90% 65%;
+    --gold: 50 100% 65%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(260 100% 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(250 15% 8%), hsl(250 10% 12%));
-    --gradient-gold: linear-gradient(135deg, hsl(45 100% 60%), hsl(35 100% 55%));
-    --gradient-team-red: linear-gradient(135deg, hsl(0 85% 60%), hsl(10 90% 55%));
-    --gradient-team-blue: linear-gradient(135deg, hsl(220 85% 60%), hsl(230 90% 55%));
-    --gradient-team-green: linear-gradient(135deg, hsl(140 85% 50%), hsl(150 90% 45%));
-    --gradient-team-orange: linear-gradient(135deg, hsl(25 95% 60%), hsl(35 100% 55%));
+    /* Gradients - Fun & Vibrant */
+    --gradient-primary: linear-gradient(135deg, hsl(270 95% 65%), hsl(190 95% 55%));
+    --gradient-secondary: linear-gradient(135deg, hsl(220 25% 10%), hsl(220 15% 15%));
+    --gradient-gold: linear-gradient(135deg, hsl(50 100% 65%), hsl(40 100% 60%));
+    --gradient-team-red: linear-gradient(135deg, hsl(350 90% 65%), hsl(10 85% 60%));
+    --gradient-team-blue: linear-gradient(135deg, hsl(200 95% 60%), hsl(220 90% 65%));
+    --gradient-team-green: linear-gradient(135deg, hsl(160 85% 55%), hsl(140 90% 50%));
+    --gradient-team-orange: linear-gradient(135deg, hsl(30 95% 65%), hsl(40 100% 60%));
 
     /* Effects */
     --glow-primary: 0 0 20px hsl(280 100% 70% / 0.5);
