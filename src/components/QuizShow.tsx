@@ -12,9 +12,7 @@ import { toast } from "sonner";
 
 const INITIAL_TEAMS: Team[] = [
   { id: "team-1", name: "Team Alpha", color: "red", score: 0 },
-  { id: "team-2", name: "Team Beta", color: "blue", score: 0 },
-  { id: "team-3", name: "Team Gamma", color: "green", score: 0 },
-  { id: "team-4", name: "Team Delta", color: "orange", score: 0 }
+  { id: "team-2", name: "Team Beta", color: "blue", score: 0 }
 ];
 
 export const QuizShow = () => {
@@ -133,6 +131,29 @@ export const QuizShow = () => {
     toast.info("Quiz preview mode! 👁️");
   }, []);
 
+  const handleImportQuiz = useCallback(() => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const jsonData = JSON.parse(event.target?.result as string);
+            setRounds(jsonData);
+            toast.success("Quiz imported successfully! 🎉");
+          } catch (error) {
+            toast.error("Failed to import quiz. Please check the file format.");
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
+  }, []);
+
   if (showQuizBuilder) {
     return (
       <QuizBuilder
@@ -144,7 +165,7 @@ export const QuizShow = () => {
   }
 
   if (gameState.gamePhase === 'setup') {
-    return <GameSetup onStartGame={handleStartGame} onCreateQuiz={() => setShowQuizBuilder(true)} />;
+    return <GameSetup onStartGame={handleStartGame} onCreateQuiz={() => setShowQuizBuilder(true)} onImportQuiz={handleImportQuiz} />;
   }
 
   const winner = teams.reduce((prev, current) => 

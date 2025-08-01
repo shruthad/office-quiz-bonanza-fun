@@ -4,18 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Play, Users, Trophy, Edit } from "lucide-react";
+import { Play, Users, Trophy, Edit, Upload } from "lucide-react";
 import { TeamCard } from "./TeamCard";
 
 interface GameSetupProps {
   onStartGame: (teams: Team[]) => void;
   onCreateQuiz: () => void;
+  onImportQuiz: () => void;
 }
 
-const DEFAULT_TEAM_NAMES = ["Team Alpha", "Team Beta", "Team Gamma", "Team Delta"];
-const TEAM_COLORS: Team['color'][] = ['red', 'blue', 'green', 'orange'];
+const DEFAULT_TEAM_NAMES = ["Team Alpha", "Team Beta"];
+const TEAM_COLORS: Team['color'][] = ['red', 'blue'];
 
-export const GameSetup = ({ onStartGame, onCreateQuiz }: GameSetupProps) => {
+export const GameSetup = ({ onStartGame, onCreateQuiz, onImportQuiz }: GameSetupProps) => {
   const [teamNames, setTeamNames] = useState<string[]>(DEFAULT_TEAM_NAMES);
 
   const handleTeamNameChange = (index: number, name: string) => {
@@ -92,7 +93,7 @@ export const GameSetup = ({ onStartGame, onCreateQuiz }: GameSetupProps) => {
                 <Trophy className="w-5 h-5" />
                 Team Preview
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {previewTeams.map((team) => (
                   <TeamCard 
                     key={team.id} 
@@ -115,20 +116,31 @@ export const GameSetup = ({ onStartGame, onCreateQuiz }: GameSetupProps) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-4">
-              <Button 
-                onClick={onCreateQuiz}
-                size="lg"
-                variant="outline"
-                className="flex-1 text-lg font-semibold"
-              >
-                <Edit className="w-5 h-5 mr-2" />
-                Create Custom Quiz
-              </Button>
+            <div className="flex flex-col gap-4">
+              <div className="flex gap-4">
+                <Button 
+                  onClick={onCreateQuiz}
+                  size="lg"
+                  variant="outline"
+                  className="flex-1 text-lg font-semibold"
+                >
+                  <Edit className="w-5 h-5 mr-2" />
+                  Create Custom Quiz
+                </Button>
+                <Button 
+                  onClick={onImportQuiz}
+                  size="lg"
+                  variant="secondary"
+                  className="flex-1 text-lg font-semibold"
+                >
+                  <Upload className="w-5 h-5 mr-2" />
+                  Import Quiz
+                </Button>
+              </div>
               <Button 
                 onClick={handleStartGame}
                 size="lg"
-                className="flex-1 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+                className="w-full text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
               >
                 <Play className="w-5 h-5 mr-2" />
                 Start Quiz Show!

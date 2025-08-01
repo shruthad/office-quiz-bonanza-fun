@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Minus, Upload, Save, Eye } from "lucide-react";
+import { Plus, Minus, Upload, Save, Eye, Download } from "lucide-react";
 import { Round, Question } from "@/types/quiz";
 import { toast } from "sonner";
 
@@ -126,6 +126,21 @@ export const QuizBuilder = ({ onSaveQuiz, onPreviewQuiz, onBack }: QuizBuilderPr
     onPreviewQuiz(quizData);
   }, [convertToQuizFormat, onPreviewQuiz]);
 
+  const handleExport = useCallback(() => {
+    const quizData = convertToQuizFormat();
+    const dataStr = JSON.stringify(quizData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `quiz-${Date.now()}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    toast.success("Quiz exported successfully! 📁");
+  }, [convertToQuizFormat]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 p-4">
       <div className="max-w-4xl mx-auto">
@@ -140,6 +155,10 @@ export const QuizBuilder = ({ onSaveQuiz, onPreviewQuiz, onBack }: QuizBuilderPr
           <div className="flex gap-2">
             <Button variant="outline" onClick={onBack}>
               Back
+            </Button>
+            <Button variant="outline" onClick={handleExport} className="flex items-center gap-2">
+              <Download className="w-4 h-4" />
+              Export
             </Button>
             <Button variant="outline" onClick={handlePreview} className="flex items-center gap-2">
               <Eye className="w-4 h-4" />
