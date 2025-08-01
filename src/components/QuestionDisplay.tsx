@@ -61,7 +61,7 @@ export const QuestionDisplay = ({
               size="lg"
               className={cn(
                 "mb-4 font-semibold transition-all duration-300",
-                isAnswerRevealed && "animate-pulse-glow"
+                isAnswerRevealed && "shadow-lg ring-2 ring-primary/30"
               )}
             >
               {isAnswerRevealed ? <EyeOff className="mr-2" /> : <Eye className="mr-2" />}

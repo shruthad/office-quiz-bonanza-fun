@@ -15,7 +15,7 @@ export const TeamCard = ({ team, isActive, showScore = true, onClick }: TeamCard
       className={cn(
         "relative overflow-hidden cursor-pointer transition-all duration-300 border-2",
         "hover:scale-105 hover:shadow-lg",
-        isActive && "animate-pulse-glow ring-2 ring-primary/50"
+        isActive && "ring-2 ring-primary/50 shadow-2xl"
       )}
       onClick={onClick}
       style={{
@@ -34,7 +34,7 @@ export const TeamCard = ({ team, isActive, showScore = true, onClick }: TeamCard
         )}
       </div>
       {isActive && (
-        <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+        <div className="absolute inset-0 bg-white/20"></div>
       )}
     </Card>
   );
