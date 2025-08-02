@@ -126,7 +126,14 @@ export const QuizShow = () => {
 
   const handlePreviewQuiz = useCallback((customRounds: typeof QUIZ_ROUNDS) => {
     setRounds(customRounds);
-    setGameState(prev => ({ ...prev, gamePhase: 'playing' }));
+    setTeams(INITIAL_TEAMS); // Initialize teams for preview
+    setGameState(prev => ({ 
+      ...prev, 
+      gamePhase: 'playing',
+      currentRound: 0,
+      currentTeam: null,
+      isAnswerRevealed: false
+    }));
     setShowQuizBuilder(false);
     toast.info("Quiz preview mode! 👁️");
   }, []);
