@@ -122,9 +122,20 @@ export const QuizBuilder = ({ onSaveQuiz, onPreviewQuiz, onBack }: QuizBuilderPr
   }, [convertToQuizFormat, onSaveQuiz]);
 
   const handlePreview = useCallback(() => {
+    // Validate that we have at least one round with one complete question
+    const hasValidQuestions = rounds.some(round => 
+      round.questions.some(q => q.content.trim() && q.answer.trim())
+    );
+    
+    if (!hasValidQuestions) {
+      toast.error("Please add at least one question with content and answer before previewing!");
+      return;
+    }
+
     const quizData = convertToQuizFormat();
     onPreviewQuiz(quizData);
-  }, [convertToQuizFormat, onPreviewQuiz]);
+    toast.info("Starting quiz preview! 👁️");
+  }, [convertToQuizFormat, onPreviewQuiz, rounds]);
 
   const handleExport = useCallback(() => {
     const quizData = convertToQuizFormat();
