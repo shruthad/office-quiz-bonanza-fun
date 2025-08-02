@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Minus, Upload, Save, Eye, Download } from "lucide-react";
+import { Plus, Minus, Upload, Save, Eye, Download, FileText } from "lucide-react";
 import { Round, Question } from "@/types/quiz";
 import { toast } from "sonner";
 
@@ -151,8 +151,45 @@ export const QuizBuilder = ({ onSaveQuiz, onPreviewQuiz, onBack }: QuizBuilderPr
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    toast.success("Quiz exported successfully! 📁");
+    toast.success("Quiz exported successfully! 📁 Save it to the /public/quizzes/ folder for easy re-import!");
   }, [convertToQuizFormat]);
+
+  const handleImportExistingQuiz = useCallback(() => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const quizData = JSON.parse(e.target?.result as string) as Round[];
+            
+            // Convert Round[] format to NewRound[] format for editing
+            const importedRounds: NewRound[] = quizData.map(round => ({
+              name: round.name,
+              description: round.description,
+              questions: round.questions.map(q => ({
+                content: q.content,
+                answer: q.answer,
+                points: q.points,
+                image: q.image
+              }))
+            }));
+            
+            setRounds(importedRounds);
+            toast.success("Quiz imported successfully! Ready for editing! ✨");
+          } catch (error) {
+            toast.error("Failed to import quiz. Please check the file format.");
+            console.error("Import error:", error);
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 p-4">
@@ -168,6 +205,10 @@ export const QuizBuilder = ({ onSaveQuiz, onPreviewQuiz, onBack }: QuizBuilderPr
           <div className="flex gap-2">
             <Button variant="outline" onClick={onBack}>
               Back
+            </Button>
+            <Button variant="outline" onClick={handleImportExistingQuiz} className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              Import Quiz
             </Button>
             <Button variant="outline" onClick={handleExport} className="flex items-center gap-2">
               <Download className="w-4 h-4" />

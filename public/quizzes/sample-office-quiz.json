@@ -1,0 +1,42 @@
+[
+  {
+    "id": "sample-round-1",
+    "name": "Office Basics",
+    "description": "Test your knowledge of basic office etiquette and procedures",
+    "currentQuestion": 0,
+    "questions": [
+      {
+        "id": "sample-q-1-1",
+        "content": "What is the recommended break time for every 2 hours of continuous work?",
+        "answer": "15 minutes",
+        "points": 100
+      },
+      {
+        "id": "sample-q-1-2",
+        "content": "Which day of the week is typically designated as 'casual Friday'?",
+        "answer": "Friday",
+        "points": 150
+      }
+    ]
+  },
+  {
+    "id": "sample-round-2",
+    "name": "Company Culture",
+    "description": "Questions about workplace culture and team dynamics",
+    "currentQuestion": 0,
+    "questions": [
+      {
+        "id": "sample-q-2-1",
+        "content": "What is the most important factor in successful team collaboration?",
+        "answer": "Communication",
+        "points": 200
+      },
+      {
+        "id": "sample-q-2-2",
+        "content": "Name one benefit of having a diverse workplace team.",
+        "answer": "Different perspectives and ideas",
+        "points": 250
+      }
+    ]
+  }
+]
