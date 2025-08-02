@@ -132,7 +132,9 @@ export const QuizBuilder = ({ onSaveQuiz, onPreviewQuiz, onBack }: QuizBuilderPr
       return;
     }
 
+    console.log("Preview button clicked, converting quiz data...");
     const quizData = convertToQuizFormat();
+    console.log("Quiz data:", quizData);
     onPreviewQuiz(quizData);
     toast.info("Starting quiz preview! 👁️");
   }, [convertToQuizFormat, onPreviewQuiz, rounds]);
