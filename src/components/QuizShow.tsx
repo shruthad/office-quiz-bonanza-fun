@@ -227,6 +227,15 @@ export const QuizShow = () => {
               Finish Quiz
             </Button>
           )}
+          
+          {/* Debug info for development */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="text-xs text-muted-foreground">
+              Round: {gameState.currentRound + 1}/{rounds.length} | 
+              Question: {(currentRound?.currentQuestion || 0) + 1}/{currentRound?.questions.length || 0} |
+              Complete: {isQuizComplete() ? 'YES' : 'NO'}
+            </div>
+          )}
         </div>
       </div>
 
