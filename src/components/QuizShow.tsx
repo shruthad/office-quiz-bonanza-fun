@@ -6,8 +6,9 @@ import { QuestionDisplay } from "./QuestionDisplay";
 import { HostControls } from "./HostControls";
 import { GameSetup } from "./GameSetup";
 import { QuizBuilder } from "./QuizBuilder";
+import { QuizResults } from "./QuizResults";
 import { Button } from "@/components/ui/button";
-import { Settings, Trophy, Edit } from "lucide-react";
+import { Settings, Trophy, Edit, Flag } from "lucide-react";
 import { toast } from "sonner";
 
 const INITIAL_TEAMS: Team[] = [
@@ -161,6 +162,16 @@ export const QuizShow = () => {
     input.click();
   }, []);
 
+  const handleFinishQuiz = useCallback(() => {
+    setGameState(prev => ({ ...prev, gamePhase: 'finished' }));
+    toast.success("Quiz finished! 🏁");
+  }, []);
+
+  const isQuizComplete = () => {
+    return gameState.currentRound === rounds.length - 1 && 
+           currentRound?.currentQuestion === currentRound?.questions.length - 1;
+  };
+
   if (showQuizBuilder) {
     return (
       <QuizBuilder
@@ -173,6 +184,10 @@ export const QuizShow = () => {
 
   if (gameState.gamePhase === 'setup') {
     return <GameSetup onStartGame={handleStartGame} onCreateQuiz={() => setShowQuizBuilder(true)} onImportQuiz={handleImportQuiz} />;
+  }
+
+  if (gameState.gamePhase === 'finished') {
+    return <QuizResults teams={teams} onRestart={handleResetGame} />;
   }
 
   const winner = teams.reduce((prev, current) => 
@@ -203,6 +218,15 @@ export const QuizShow = () => {
             <Settings className="w-4 h-4" />
             {showHostControls ? 'Hide' : 'Show'} Controls
           </Button>
+          {isQuizComplete() && (
+            <Button
+              onClick={handleFinishQuiz}
+              className="flex items-center gap-2 bg-gradient-to-r from-accent to-gold hover:from-accent/90 hover:to-gold/90"
+            >
+              <Flag className="w-4 h-4" />
+              Finish Quiz
+            </Button>
+          )}
         </div>
       </div>
 
