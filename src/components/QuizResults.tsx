@@ -50,24 +50,23 @@ export const QuizResults = ({ teams, onRestart }: QuizResultsProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
+    <div className="h-screen bg-gradient-to-br from-background via-background to-secondary/20 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="text-center py-8">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
+      <div className="text-center py-4 flex-shrink-0">
+        <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3">
           🎉 Quiz Complete! 🎉
         </h1>
         <Button
           onClick={onRestart}
           className="flex items-center gap-2 mx-auto"
-          size="lg"
         >
-          <RotateCcw className="w-5 h-5" />
+          <RotateCcw className="w-4 h-4" />
           Start New Quiz
         </Button>
       </div>
 
       {/* Results Split View */}
-      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[70vh]">
+      <div className="grid grid-cols-1 md:grid-cols-2 flex-1 overflow-hidden">
         {/* Winner Side */}
         <div className="winner-side relative overflow-hidden bg-gradient-to-br from-accent/20 to-gold/30 border-r border-accent/30 flex flex-col items-center justify-center p-8">
           <div className="text-center z-10 relative">

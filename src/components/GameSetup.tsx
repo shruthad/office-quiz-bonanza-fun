@@ -43,14 +43,14 @@ export const GameSetup = ({ onStartGame, onCreateQuiz, onImportQuiz }: GameSetup
   }));
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-4xl space-y-8">
+    <div className="h-screen flex items-center justify-center p-4 overflow-hidden">
+      <div className="w-full max-w-4xl space-y-4">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-slide-up">
+        <div className="text-center space-y-2">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-slide-up">
             Office Quiz Show! 🎉
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-lg text-muted-foreground">
             Get ready for an epic battle of wits with your colleagues!
           </p>
         </div>
@@ -63,7 +63,7 @@ export const GameSetup = ({ onStartGame, onCreateQuiz, onImportQuiz }: GameSetup
               Team Setup
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4">
             {/* Team Name Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {teamNames.map((name, index) => (
@@ -88,12 +88,12 @@ export const GameSetup = ({ onStartGame, onCreateQuiz, onImportQuiz }: GameSetup
             </div>
 
             {/* Team Preview */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Trophy className="w-5 h-5" />
+            <div className="space-y-3">
+              <h3 className="text-base font-semibold flex items-center gap-2">
+                <Trophy className="w-4 h-4" />
                 Team Preview
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {previewTeams.map((team) => (
                   <TeamCard 
                     key={team.id} 
@@ -105,44 +105,41 @@ export const GameSetup = ({ onStartGame, onCreateQuiz, onImportQuiz }: GameSetup
             </div>
 
             {/* Game Info */}
-            <div className="bg-muted/30 rounded-lg p-4 space-y-2">
-              <h4 className="font-semibold text-accent">Game Overview:</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>🧩 <strong>Round 1:</strong> Visual Word Play - Solve clever visual puzzles</li>
-                <li>🏢 <strong>Round 2:</strong> Guess The Logo - Identify famous brands</li>
-                <li>😂 <strong>Round 3:</strong> The Meme Scene - Movie/TV shows from memes</li>
-                <li>🏆 Points increase in difficulty, team with highest score wins!</li>
+            <div className="bg-muted/30 rounded-lg p-3 space-y-1">
+              <h4 className="font-semibold text-accent text-sm">Game Overview:</h4>
+              <ul className="text-xs text-muted-foreground space-y-1">
+                <li>🧩 <strong>Round 1:</strong> Visual Word Play</li>
+                <li>🏢 <strong>Round 2:</strong> Guess The Logo</li>
+                <li>😂 <strong>Round 3:</strong> The Meme Scene</li>
+                <li>🏆 Points increase in difficulty, highest score wins!</li>
               </ul>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col gap-4">
-              <div className="flex gap-4">
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-3">
                 <Button 
                   onClick={onCreateQuiz}
-                  size="lg"
                   variant="outline"
-                  className="flex-1 text-lg font-semibold"
+                  className="flex-1 text-sm font-semibold"
                 >
-                  <Edit className="w-5 h-5 mr-2" />
-                  Create Custom Quiz
+                  <Edit className="w-4 h-4 mr-2" />
+                  Create Quiz
                 </Button>
                 <Button 
                   onClick={onImportQuiz}
-                  size="lg"
                   variant="secondary"
-                  className="flex-1 text-lg font-semibold"
+                  className="flex-1 text-sm font-semibold"
                 >
-                  <Upload className="w-5 h-5 mr-2" />
+                  <Upload className="w-4 h-4 mr-2" />
                   Import Quiz
                 </Button>
               </div>
               <Button 
                 onClick={handleStartGame}
-                size="lg"
-                className="w-full text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+                className="w-full text-base font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
               >
-                <Play className="w-5 h-5 mr-2" />
+                <Play className="w-4 h-4 mr-2" />
                 Start Quiz Show!
               </Button>
             </div>

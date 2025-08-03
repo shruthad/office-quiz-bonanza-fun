@@ -195,10 +195,10 @@ export const QuizShow = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 p-4">
+    <div className="h-screen bg-gradient-to-br from-background via-background to-secondary/20 p-2 overflow-hidden flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+      <div className="flex items-center justify-between mb-3 flex-shrink-0">
+        <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           Office Quiz Show
         </h1>
         <div className="flex gap-2">
@@ -230,14 +230,14 @@ export const QuizShow = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 flex-1 overflow-hidden">
         {/* Teams Display */}
-        <div className="lg:col-span-1 space-y-4">
-          <div className="flex items-center gap-2 mb-4">
-            <Trophy className="w-5 h-5 text-accent" />
-            <h2 className="text-xl font-semibold">Teams</h2>
+        <div className="lg:col-span-1 space-y-3 overflow-y-auto">
+          <div className="flex items-center gap-2 mb-3">
+            <Trophy className="w-4 h-4 text-accent" />
+            <h2 className="text-lg font-semibold">Teams</h2>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-2">
             {teams.map((team) => (
               <TeamCard
                 key={team.id}
@@ -249,16 +249,16 @@ export const QuizShow = () => {
           </div>
           
           {/* Winner Display */}
-          <div className="mt-6 p-4 rounded-lg border border-accent/30 bg-gradient-to-r from-accent/10 to-gold/10">
-            <h3 className="text-sm font-medium text-center mb-2">Current Leader</h3>
+          <div className="mt-4 p-3 rounded-lg border border-accent/30 bg-gradient-to-r from-accent/10 to-gold/10">
+            <h3 className="text-xs font-medium text-center mb-2">Current Leader</h3>
             <div className="text-center">
               <div 
-                className="text-lg font-bold mb-1"
+                className="text-base font-bold mb-1"
                 style={{ color: `hsl(var(--team-${winner.color}))` }}
               >
                 {winner.name}
               </div>
-              <div className="text-2xl font-bold text-accent animate-celebration">
+              <div className="text-xl font-bold text-accent animate-celebration">
                 {winner.score}
               </div>
             </div>
@@ -266,7 +266,7 @@ export const QuizShow = () => {
         </div>
 
         {/* Main Content */}
-        <div className={`${showHostControls ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
+        <div className={`${showHostControls ? 'lg:col-span-2' : 'lg:col-span-3'} overflow-y-auto`}>
           {currentQuestion && (
             <QuestionDisplay
               question={currentQuestion}
@@ -279,7 +279,7 @@ export const QuizShow = () => {
 
         {/* Host Controls */}
         {showHostControls && (
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 overflow-y-auto">
             <HostControls
               teams={teams}
               currentRound={currentRound}
